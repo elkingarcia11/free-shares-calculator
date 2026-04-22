@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Free Stock Calculator</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="header">
+        <div class="badge">Calculator</div>
+        <h1>Free Shares Calculator</h1>
+
+        <div class="explainTop">
+          <p>
+            <strong>“Free shares”</strong> means that after selling part of your
+            position, you’ve fully recovered your original investment (excluding
+            taxes and fees) and can continue holding the remaining shares
+            without risking additional losses on your initial capital.
+          </p>
+        </div>
+      </header>
+
+      <section class="card">
+        <p class="subhead subheadInCard">
+          Enter your <strong>average cost</strong> and
+          <strong>quantity</strong>, then choose how many shares you want to
+          keep as “free” after selling the rest.
+        </p>
+        <form id="calcForm" class="form" novalidate>
+          <div class="grid">
+            <label class="field">
+              <span class="label">Stock (optional)</span>
+              <input
+                id="stock"
+                name="stock"
+                type="text"
+                placeholder="AAPL"
+                autocomplete="off"
+              />
+            </label>
+
+            <label class="field">
+              <span class="label">Average cost (per share)</span>
+              <div class="prefix">
+                <span aria-hidden="true" class="prefixSymbol">$</span>
+                <input
+                  id="avgCost"
+                  name="avgCost"
+                  type="number"
+                  inputmode="decimal"
+                  min="0"
+                  step="0.0001"
+                  placeholder="12.34"
+                  required
+                />
+              </div>
+              <span class="hint"
+                >Your cost basis per share (average cost method).</span
+              >
+            </label>
+
+            <label class="field">
+              <span class="label">Quantity (shares owned)</span>
+              <input
+                id="quantity"
+                name="quantity"
+                type="number"
+                inputmode="numeric"
+                min="1"
+                step="1"
+                placeholder="100"
+                required
+              />
+            </label>
+
+            <label class="field">
+              <span class="label">Shares you want to make free</span>
+              <input
+                id="freeShares"
+                name="freeShares"
+                type="number"
+                inputmode="numeric"
+                min="1"
+                step="1"
+                placeholder="25"
+                required
+              />
+              <span class="hint"
+                >You must keep at least 1 share, so you can sell at most
+                <span id="maxSellHint">quantity − 1</span>.</span
+              >
+            </label>
+          </div>
+
+        </form>
+      </section>
+
+      <section class="card result" aria-live="polite">
+        <div id="errors" class="errors" hidden></div>
+
+        <div id="resultBody" hidden>
+          <div class="resultTop">
+            <h2 class="resultTitle">Result</h2>
+            <div id="resultTicker" class="resultTicker" hidden></div>
+          </div>
+
+          <div class="resultGrid">
+            <div class="kpi">
+              <div class="kpiLabel">Shares to sell</div>
+              <div class="kpiValue" id="sharesToSell">—</div>
+            </div>
+
+            <div class="kpi">
+              <div class="kpiLabel">Required average sell price</div>
+              <div class="kpiValue" id="requiredPrice">—</div>
+            </div>
+          </div>
+
+          <p class="resultSentence" id="resultSentence">
+            In order to make <strong id="xFreeShares">—</strong> shares free,
+            you will need to sell <strong id="ySharesToSell">—</strong> shares
+            at an average price of <strong id="zRequiredPrice">—</strong>.
+          </p>
+
+          <details class="explain">
+            <summary>How this works</summary>
+            <div class="explainBody">
+              <p>
+                “Free shares” here means: after selling some shares, you’ve
+                recovered your entire original cost basis (ignoring taxes/fees),
+                while still holding your remaining shares.
+              </p>
+              <p>
+                Original cost basis is <code>avgCost × quantity</code>. If you
+                sell <code>sharesToSell</code> shares at an average price of
+                <code>P</code>, proceeds are <code>P × sharesToSell</code>.
+                Setting proceeds equal to the original cost basis gives the
+                required <code>P</code>.
+              </p>
+            </div>
+          </details>
+        </div>
+
+        <div class="empty" id="emptyState">Fill the form to see results.</div>
+      </section>
+
+      <footer class="footer">
+        <span>Local-only. No data is sent anywhere.</span>
+      </footer>
+    </main>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
