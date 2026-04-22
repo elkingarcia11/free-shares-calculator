@@ -323,37 +323,6 @@ button:active{
   color: var(--muted2);
 }
 
-.explain{
-  position: relative;
-  margin-top: 12px;
-  border: 1px solid rgba(17,24,39,.10);
-  border-radius: 16px;
-  background: rgba(255,255,255,.70);
-}
-
-.explain summary{
-  cursor: pointer;
-  padding: 12px 14px;
-  font-weight: 700;
-  color: rgba(17,24,39,.86);
-}
-
-.explainBody{
-  padding: 0 14px 14px;
-  color: var(--muted);
-  line-height: 1.55;
-}
-
-.explain code{
-  color: rgba(17,24,39,.92);
-  background: rgba(5,150,105,.10);
-  border: 1px solid rgba(5,150,105,.18);
-  padding: 2px 6px;
-  border-radius: 8px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: .95em;
-}
-
 .footer{
   margin-top: 16px;
   color: rgba(17,24,39,.45);
